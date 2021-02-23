@@ -7,6 +7,8 @@ mkShell {
     git
 
     nodePackages.node2nix
+
+    fmjs
   ];
   shellHook = ''
   '';

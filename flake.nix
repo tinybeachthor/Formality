@@ -10,12 +10,16 @@
   outputs = { self, flake-utils, nixpkgs, tinybeachthor }:
     flake-utils.lib.eachDefaultSystem (system:
       let
+        fmjs = (import ./nix/default.nix { inherit pkgs system; }).package;
         pkgs = (import nixpkgs {
           inherit system;
-          overlays = [ tinybeachthor.overlay ];
+          overlays = [
+            tinybeachthor.overlay
+            (self: super: { inherit fmjs; })
+          ];
         });
       in {
         devShell = import ./shell.nix { inherit pkgs; };
-        defaultPackage = (import ./nix/default.nix { inherit pkgs system; }).package;
+        defaultPackage = fmjs;
       });
 }
