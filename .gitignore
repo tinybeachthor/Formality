@@ -7,3 +7,4 @@ bin/hs/cabal.project.local*
 web/node_modules/
 
 .direnv
+result
